@@ -74,6 +74,7 @@ function renderTodoItems(todoItems) {
     // todoListElement.appendChild(newTodoLiElement);
   }
 }
+
 // filter uchun
 function filterTodoList(key) {
   return todoList.filter(function (todoItem) {
@@ -119,6 +120,12 @@ function deleteTodo() {
       });
       delete todoList[todoIndex];
       window.localStorage.removeItem("todoList");
+      let data = JSON.parse(localStorage.getItem("todoList"));
+      renderTodoItems(data);
+      data.pop();
+      window.localStorage.setItem("todoList", JSON.stringify(data));
+      data = JSON.parse(localStorage.getItem("todoList"));
+      renderTodoItems(data);
       renderTodoItems(todoList);
     });
   });
